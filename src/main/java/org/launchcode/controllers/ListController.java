@@ -25,7 +25,9 @@ public class ListController {
         columnChoices.put("position type", "Position Type");
         columnChoices.put("all", "All");
     }
-
+//    list.html. This template displays the list options,
+//    using data from the columnChoices HashMap passed in
+//    via the model as columns
     @RequestMapping(value = "")
     public String list(Model model) {
 
@@ -36,13 +38,14 @@ public class ListController {
 
     @RequestMapping(value = "values")
     public String listColumnValues(Model model, @RequestParam String column) {
-
+//        In the case of "all" it will fetch all job data, and then render the list-jobs.html view template
         if (column.equals("all")) {
             ArrayList<HashMap<String, String>> jobs = JobData.findAll();
             model.addAttribute("title", "All Jobs");
             model.addAttribute("jobs", jobs);
             return "list-jobs";
         } else {
+//        In all other cases, it fetches only the values for the given column and passes them to the list-column.html view template.
             ArrayList<String> items = JobData.findAll(column);
             model.addAttribute("title", "All " + columnChoices.get(column) + " Values");
             model.addAttribute("column", column);

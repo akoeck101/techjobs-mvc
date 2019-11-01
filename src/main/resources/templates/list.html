@@ -12,7 +12,10 @@
         <ul>
             <li th:each="column : ${columns}">
                 <a th:href="@{/list/values(column=${column.key})}" th:text="${column.value}"></a>
+<!--                In list.html, we specify a query parameter named column by using column=.-->
+<!--                The value of the query parameter is determined dynamically based on the value of ${column.key}-->
             </li>
+
         </ul>
     </div>
 
